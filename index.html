@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Antojitos Chapines: desayunos, almuerzos y cenas con sabor guatemalteco. Pedidos por WhatsApp.">
+  <title>Antojitos Chapines | Comida guatemalteca</title>
+  <style>
+    :root {
+      --verde: #1f6f4a;
+      --verde-oscuro: #124a31;
+      --amarillo: #f2b705;
+      --rojo: #c0392b;
+      --crema: #fff9ec;
+      --texto: #2b2118;
+      --blanco: #ffffff;
+      --radio: 16px;
+      --sombra: 0 6px 18px rgba(0, 0, 0, 0.13);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--texto);
+      background: var(--crema);
+    }
+
+    img, svg { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+
+    .contenedor { width: min(100% - 2rem, 1100px); margin-inline: auto; }
+
+    /* ---------- Encabezado ---------- */
+    header {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 4px solid var(--amarillo);
+    }
+
+    .barra {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.7rem 0;
+    }
+
+    .logo { font-size: 1.35rem; font-weight: 800; text-decoration: none; }
+    .logo span { color: var(--amarillo); }
+
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1rem; }
+    nav a { text-decoration: none; font-weight: 600; }
+    nav a:hover, nav a:focus { color: var(--amarillo); }
+
+    /* ---------- Portada ---------- */
+    .portada {
+      background: linear-gradient(160deg, var(--verde), var(--verde-oscuro));
+      color: var(--blanco);
+      padding: 3rem 0;
+    }
+
+    .portada-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    .portada h1 { font-size: clamp(2rem, 7vw, 3.4rem); line-height: 1.12; }
+    .portada h1 span { color: var(--amarillo); }
+    .portada p { margin: 1rem auto 1.6rem; max-width: 34rem; font-size: 1.1rem; }
+    .portada-imagen { max-width: 380px; margin-inline: auto; width: 100%; }
+
+    .boton {
+      display: inline-block;
+      background: var(--amarillo);
+      color: #2b2118;
+      padding: 0.85rem 1.7rem;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: var(--sombra);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .boton:hover, .boton:focus { background: #ffd23f; transform: translateY(-2px); }
+    .boton-verde { background: #25a244; color: var(--blanco); }
+    .boton-verde:hover, .boton-verde:focus { background: #1e8a39; }
+
+    /* ---------- Secciones ---------- */
+    section { padding: 3rem 0; }
+    section h2 {
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      color: var(--verde-oscuro);
+      margin-bottom: 0.3rem;
+    }
+    .subtitulo { margin-bottom: 1.6rem; opacity: 0.8; }
+
+    .franja {
+      display: inline-block;
+      background: var(--amarillo);
+      color: #2b2118;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.15rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 0.6rem;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.3rem;
+    }
+
+    .plato {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plato-imagen {
+      background: linear-gradient(180deg, #fdf0cf, #fbe3a6);
+      padding: 1rem 1.5rem 0.4rem;
+    }
+    .plato-imagen svg { margin-inline: auto; max-height: 150px; width: auto; }
+
+    .plato-texto { padding: 1rem 1.2rem 1.3rem; }
+    .plato-cabecera { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    .plato-cabecera h3 { font-size: 1.1rem; color: var(--verde-oscuro); }
+    .precio { color: var(--rojo); font-weight: 800; white-space: nowrap; }
+    .plato-texto p { margin-top: 0.4rem; font-size: 0.95rem; }
+
+    .fondo-alterno { background: #f3ead2; }
+
+    /* ---------- Contacto ---------- */
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+
+    .tarjeta {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      padding: 1.5rem;
+      box-shadow: var(--sombra);
+    }
+    .tarjeta h3 { color: var(--rojo); margin-bottom: 0.8rem; }
+
+    table { width: 100%; border-collapse: collapse; }
+    td { padding: 0.45rem 0; border-bottom: 1px solid #eee; }
+    td:last-child { text-align: right; font-weight: 600; }
+
+    /* TELÉFONO: cambia el número aquí y en el enlace de WhatsApp */
+    .telefono { font-size: 1.3rem; font-weight: 800; color: var(--verde-oscuro); }
+
+    .pedidos { background: var(--verde-oscuro); color: var(--blanco); text-align: center; }
+    .pedidos h2 { color: var(--amarillo); }
+    .pedidos p { margin-bottom: 1.4rem; }
+
+    footer {
+      background: #0d3322;
+      color: #cfe3d8;
+      text-align: center;
+      padding: 1.2rem 0;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Tablet ---------- */
+    @media (min-width: 600px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ---------- Computadora ---------- */
+    @media (min-width: 900px) {
+      .portada { padding: 5rem 0; }
+      .portada-grid { grid-template-columns: 1.1fr 0.9fr; text-align: left; }
+      .portada p { margin-left: 0; }
+      .menu-grid { grid-template-columns: repeat(3, 1fr); }
+      .info-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .boton { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="contenedor barra">
+      <a class="logo" href="#inicio">Antojitos <span>Chapines</span></a>
+      <nav aria-label="Principal">
+        <ul>
+          <li><a href="#desayunos">Desayunos</a></li>
+          <li><a href="#almuerzos">Almuerzos</a></li>
+          <li><a href="#cenas">Cenas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <div class="portada">
+      <div class="contenedor portada-grid">
+        <div>
+          <h1>El sabor de casa, <span>a la guatemalteca</span></h1>
+          <p>Desayunos, almuerzos y cenas preparados cada día con ingredientes frescos y la sazón de siempre.</p>
+          <a class="boton boton-verde" href="https://wa.me/50254481267?text=Hola%2C%20quiero%20hacer%20un%20pedido">Pedir por WhatsApp</a>
+        </div>
+        <div class="portada-imagen">
+          <svg viewBox="0 0 400 220" role="img" aria-label="Ilustración de un comal con tortillas" xmlns="http://www.w3.org/2000/svg"><ellipse cx="200" cy="190" rx="170" ry="20" fill="#00000030"/><ellipse cx="200" cy="140" rx="160" ry="48" fill="#2b2118"/><ellipse cx="200" cy="132" rx="150" ry="42" fill="#3d3024"/><ellipse cx="150" cy="128" rx="42" ry="14" fill="#f2d28a"/><ellipse cx="215" cy="122" rx="42" ry="14" fill="#e9c577"/><ellipse cx="262" cy="136" rx="36" ry="12" fill="#f2d28a"/><circle cx="150" cy="128" r="3" fill="#b8862e"/><circle cx="216" cy="122" r="3" fill="#b8862e"/><circle cx="262" cy="136" r="3" fill="#b8862e"/><path d="M120 90 q-10-20 0-40 M200 84 q-10-20 0-40 M280 90 q-10-20 0-40" stroke="#ffffff88" stroke-width="7" fill="none" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <section id="desayunos">
+      <div class="contenedor">
+        <span class="franja">Mañanas</span>
+        <h2>Desayunos</h2>
+        <p class="subtitulo">Para empezar el día con energía.</p>
+        <div class="menu-grid">
+          <article class="plato">
+            <div class="plato-imagen">
+              <svg viewBox="0 0 200 130" role="img" aria-label="Plato de huevo revuelto con frijoles y plátano" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="108" rx="82" ry="14" fill="#00000022"/><ellipse cx="100" cy="82" rx="78" ry="32" fill="#fffaf0" stroke="#d9c7a3" stroke-width="3"/><ellipse cx="100" cy="82" rx="58" ry="22" fill="#f6ecd8"/><ellipse cx="82" cy="72" rx="24" ry="14" fill="#ffd54a"/><ellipse cx="76" cy="68" rx="9" ry="5" fill="#ffe88a"/><ellipse cx="122" cy="74" rx="22" ry="13" fill="#4a2a1c"/><ellipse cx="118" cy="70" rx="8" ry="4" fill="#6b3f2a"/><ellipse cx="108" cy="94" rx="14" ry="6" fill="#e8c36a"/></svg>
+            </div>
+            <div class="plato-texto">
+              <div class="plato-cabecera"><h3>Desayuno chapín</h3><span class="precio">Q30</span></div>
+              <p>Huevos revueltos con frijol volteado, plátano frito, queso fresco y tortillas calientes.</p>
+            </div>
+          </article>
+          <article class="plato">
+            <div class="plato-imagen">
+              <svg viewBox="0 0 200 130" role="img" aria-label="Taza de café caliente" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="112" rx="60" ry="9" fill="#00000022"/><path d="M58 56 H138 Q136 104 98 106 Q60 104 58 56Z" fill="#fffaf0" stroke="#d9c7a3" stroke-width="3"/><path d="M138 66 q26 0 22 18 q-4 14 -26 12" stroke="#d9c7a3" stroke-width="6" fill="none"/><ellipse cx="98" cy="56" rx="40" ry="8" fill="#4a2a1c"/><path d="M84 36 q-6-10 0-18 M100 34 q-6-10 0-18 M116 36 q-6-10 0-18" stroke="#c9c9c9" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            <div class="plato-texto">
+              <div class="plato-cabecera"><h3>Café de olla</h3><span class="precio">Q10</span></div>
+              <p>Café caliente con un toque de canela, servido todo el día.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="almuerzos" class="fondo-alterno">
+      <div class="contenedor">
+        <span class="franja">Mediodía</span>
+        <h2>Almuerzos</h2>
+        <p class="subtitulo">Platos completos con acompañamientos.</p>
+        <div class="menu-grid">
+          <article class="plato">
+            <div class="plato-imagen">
+              <svg viewBox="0 0 200 130" role="img" aria-label="Plato de pollo asado con arroz, puré y ensalada" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="108" rx="82" ry="14" fill="#00000022"/><ellipse cx="100" cy="82" rx="78" ry="32" fill="#fffaf0" stroke="#d9c7a3" stroke-width="3"/><ellipse cx="100" cy="82" rx="58" ry="22" fill="#f6ecd8"/><ellipse cx="82" cy="72" rx="26" ry="16" fill="#b8641e"/><ellipse cx="78" cy="68" rx="14" ry="7" fill="#d98a3d"/><circle cx="122" cy="68" r="12" fill="#f3e9c6"/><circle cx="130" cy="86" r="9" fill="#fff3c4"/><circle cx="112" cy="90" r="5" fill="#5a9e3c"/><circle cx="104" cy="86" r="4" fill="#d9442b"/><circle cx="118" cy="94" r="4" fill="#5a9e3c"/></svg>
+            </div>
+            <div class="plato-texto">
+              <div class="plato-cabecera"><h3>Pollo asado</h3><span class="precio">Q45</span></div>
+              <p>Pollo asado al carbón con arroz, puré de papa y ensalada fresca.</p>
+            </div>
+          </article>
+          <article class="plato">
+            <div class="plato-imagen">
+              <svg viewBox="0 0 200 130" role="img" aria-label="Plato de carne adobada con arroz y tortillas" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="108" rx="82" ry="14" fill="#00000022"/><ellipse cx="100" cy="82" rx="78" ry="32" fill="#fffaf0" stroke="#d9c7a3" stroke-width="3"/><ellipse cx="100" cy="82" rx="58" ry="22" fill="#f6ecd8"/><rect x="56" y="62" width="52" height="26" rx="10" fill="#8a2f12"/><rect x="62" y="66" width="40" height="8" rx="4" fill="#b8481e"/><circle cx="124" cy="72" r="13" fill="#f3e9c6"/><circle cx="140" cy="90" r="9" fill="#e8c36a"/><circle cx="122" cy="94" r="5" fill="#5a9e3c"/></svg>
+            </div>
+            <div class="plato-texto">
+              <div class="plato-cabecera"><h3>Carne adobada</h3><span class="precio">Q50</span></div>
+              <p>Carne adobada con recado de la casa, arroz, ensalada y tortillas.</p>
+            </div>
+          </article>
+          <article class="plato">
+            <div class="plato-imagen">
+              <svg viewBox="0 0 200 130" role="img" aria-label="Plato hondo de caldo de pollo con vegetales" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="108" rx="70" ry="10" fill="#00000022"/><path d="M30 62 H170 Q168 112 100 114 Q32 112 30 62Z" fill="#fffaf0" stroke="#d9c7a3" stroke-width="3"/><ellipse cx="100" cy="62" rx="70" ry="14" fill="#e8a33a"/><circle cx="80" cy="62" r="7" fill="#f28c28"/><circle cx="108" cy="64" r="6" fill="#5a9e3c"/><circle cx="128" cy="60" r="7" fill="#f6e7b4"/><path d="M80 40 q-6-10 0-18 M100 38 q-6-10 0-18 M120 40 q-6-10 0-18" stroke="#c9c9c9" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            <div class="plato-texto">
+              <div class="plato-cabecera"><h3>Caldo de pollo</h3><span class="precio">Q40</span></div>
+              <p>Caldo casero con pollo, güisquil, zanahoria y arroz, bien caliente.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cenas">
+      <div class="contenedor">
+        <span class="franja">Noches</span>
+        <h2>Cenas</h2>
+        <p class="subtitulo">Ligeras, sabrosas y como en casa.</p>
+        <div class="menu-grid">
+          <article class="plato">
+            <div class="plato-imagen">
+              <svg viewBox="0 0 200 130" role="img" aria-label="Plato de huevo revuelto con frijoles y plátano" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="108" rx="82" ry="14" fill="#00000022"/><ellipse cx="100" cy="82" rx="78" ry="32" fill="#fffaf0" stroke="#d9c7a3" stroke-width="3"/><ellipse cx="100" cy="82" rx="58" ry="22" fill="#f6ecd8"/><ellipse cx="82" cy="72" rx="24" ry="14" fill="#ffd54a"/><ellipse cx="76" cy="68" rx="9" ry="5" fill="#ffe88a"/><ellipse cx="122" cy="74" rx="22" ry="13" fill="#4a2a1c"/><ellipse cx="118" cy="70" rx="8" ry="4" fill="#6b3f2a"/><ellipse cx="108" cy="94" rx="14" ry="6" fill="#e8c36a"/></svg>
+            </div>
+            <div class="plato-texto">
+              <div class="plato-cabecera"><h3>Cena de huevo con frijol</h3><span class="precio">Q28</span></div>
+              <p>Huevo revuelto, frijoles volteados y pan o tortillas.</p>
+            </div>
+          </article>
+          <article class="plato">
+            <div class="plato-imagen">
+              <svg viewBox="0 0 200 130" role="img" aria-label="Taza de café caliente" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="112" rx="60" ry="9" fill="#00000022"/><path d="M58 56 H138 Q136 104 98 106 Q60 104 58 56Z" fill="#fffaf0" stroke="#d9c7a3" stroke-width="3"/><path d="M138 66 q26 0 22 18 q-4 14 -26 12" stroke="#d9c7a3" stroke-width="6" fill="none"/><ellipse cx="98" cy="56" rx="40" ry="8" fill="#4a2a1c"/><path d="M84 36 q-6-10 0-18 M100 34 q-6-10 0-18 M116 36 q-6-10 0-18" stroke="#c9c9c9" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            <div class="plato-texto">
+              <div class="plato-cabecera"><h3>Café con pan</h3><span class="precio">Q15</span></div>
+              <p>Para cerrar el día, café recién hecho con pan dulce.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="fondo-alterno">
+      <div class="contenedor info-grid">
+        <div class="tarjeta">
+          <h3>Horarios</h3>
+          <table>
+            <tr><td>Desayunos</td><td>6:30 - 10:00</td></tr>
+            <tr><td>Almuerzos</td><td>11:30 - 15:00</td></tr>
+            <tr><td>Cenas</td><td>18:00 - 21:00</td></tr>
+          </table>
+        </div>
+        <div class="tarjeta">
+          <h3>Llámanos</h3>
+          <p>Haz tu pedido o consulta por el menú del día:</p>
+          <p class="telefono"><a href="tel:+50254481267">5448 1267</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pedidos">
+      <div class="contenedor">
+        <h2>¿Se te antoja algo?</h2>
+        <p>Escríbenos por WhatsApp y te respondemos al momento.</p>
+        <a class="boton" href="https://wa.me/50254481267?text=Hola%2C%20quiero%20hacer%20un%20pedido">Hacer pedido</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="contenedor">&copy; 2026 Antojitos Chapines. Hecho con cariño en Guatemala.</div>
+  </footer>
+
+</body>
+</html>
